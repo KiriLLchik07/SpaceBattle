@@ -1,5 +1,5 @@
 ﻿using Hwdtech;
-namespace SpaceBattle_workspace;
+using SpaceBattle_workspace;
 
 public class RegisterIoCDependencyMoveCommand : Hwdtech.ICommand
 {
