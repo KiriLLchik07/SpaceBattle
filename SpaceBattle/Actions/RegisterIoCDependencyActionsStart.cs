@@ -1,5 +1,5 @@
 ﻿using Hwdtech;
-
+using SpaceBattle_workspace;
 namespace SpaceBattle_workspace;
 
 public class RegisterIoCDependencyActionsStart : Hwdtech.ICommand
@@ -15,7 +15,7 @@ public class RegisterIoCDependencyActionsStart : Hwdtech.ICommand
                 var cmdType = (string)args[1];
                 var q = new Queue<Hwdtech.ICommand>();
 
-                return new StartCommand(gameObject, q, cmdType);
+                return new ActionStart(gameObject, q, cmdType);
             }
         ).Execute();
     }

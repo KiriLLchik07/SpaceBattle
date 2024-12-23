@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Moq;
 using SpaceBattle_workspace;
 
-namespace SpaceBattle.Tests;
+namespace SpaceBattle_Tests;
 
 public class InjectableCommandTest
 {

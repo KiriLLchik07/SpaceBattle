@@ -1,6 +1,6 @@
 ﻿
 using Hwdtech;
-using SpaceBattle.Interface;
+
 
 namespace SpaceBattle_workspace;
 
@@ -19,12 +19,12 @@ public class ActionStart : Hwdtech.ICommand
 
     public void Execute()
     {
-        var cmd = IoC.Resolve<Hwdtech.ICommand>($"Commands.{_cmdType}", _gameObject);
+        var cmd = IoC.Resolve<ICommand>($"Commands.{_cmdType}", _gameObject);
         var injectable = (Hwdtech.ICommand)IoC.Resolve<ICommandInjectable>("Commands.CommandInjectable");
         var repeat = new RepeatCommand(injectable, _q);
-        var repeatable = IoC.Resolve<ICommand>($"Macro.{_cmdType}", cmd, repeat);
+        var repeatable = IoC.Resolve<Hwdtech.ICommand>($"Macro.{_cmdType}", cmd, repeat);
 
-        ((ICommandInjectable)injectable).Inject(repeatable);
+        ((ICommandInjectable)injectable).Inject(repeatable); 
         _gameObject[$"repeatable{_cmdType}"] = injectable;
         _q.Enqueue(repeatable);
     }

@@ -1,4 +1,4 @@
-﻿namespace SpaceBattle.Tests;
+﻿namespace SpaceBattle_Tests;
 
 using Hwdtech;
 using Hwdtech.Ioc;
@@ -23,6 +23,6 @@ public class RegisterIoCDependencyActionsStartTests
         var command = IoC.Resolve<Hwdtech.ICommand>("Actions.Start", gameObject, "Move");
 
         // Assert
-        Assert.IsType<StartCommand>(command);
+        Assert.IsType<ActionStart>(command);
     }
 }

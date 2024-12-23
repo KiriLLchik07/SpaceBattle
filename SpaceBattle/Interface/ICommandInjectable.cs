@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceBattle_workspace;
+﻿using Hwdtech;
 
-namespace SpaceBattle.Interface
+
+namespace SpaceBattle_workspace;
+
+public interface ICommandInjectable
 {
-    internal interface ICommandInjectable
-    {
-    void Inject(Hwdtech.ICommand cmd);
-    }
+void Inject(Hwdtech.ICommand cmd);
 }
