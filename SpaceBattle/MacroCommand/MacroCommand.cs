@@ -1,8 +1,9 @@
 namespace SpaceBattle_workspace;
-public class SimpleMacroCommand : ICommand
+
+public class MacroCommand : ICommand
 {
     public ICommand[] cmds;
-    public SimpleMacroCommand(params ICommand[] cmds)
+    public MacroCommand(params ICommand[] cmds)
     {
         this.cmds = cmds;
     }

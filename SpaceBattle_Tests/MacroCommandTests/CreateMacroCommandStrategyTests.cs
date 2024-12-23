@@ -20,6 +20,12 @@ namespace SpaceBattle_Tests
 
             IoC.Resolve<Hwdtech.ICommand>(
                 "IoC.Register",
+                "Commands.Macro",
+                (Func<object[], object>)((args) => new MacroCommand((SpaceBattle_workspace.ICommand[])args))
+            ).Execute();
+
+            IoC.Resolve<Hwdtech.ICommand>(
+                "IoC.Register",
                 "Specs.Macro.Test",
                 (Func<object[], object>)((args) => new[] { "Command1", "Command2" })
             ).Execute();
@@ -44,6 +50,7 @@ namespace SpaceBattle_Tests
             command_1.Verify(m => m.Execute(), Times.Once());
             command_2.Verify(m => m.Execute(), Times.Once());
         }
+
 
         [Fact]
         public void ResolveMacroCommand_ThrowsIfNoSpec()

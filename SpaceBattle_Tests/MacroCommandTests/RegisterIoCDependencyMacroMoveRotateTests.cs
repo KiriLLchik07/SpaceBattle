@@ -3,56 +3,50 @@ using Hwdtech.Ioc;
 using Moq;
 using SpaceBattle_workspace;
 
-namespace SpaceBattle.Tests
+namespace SpaceBattle_Tests
 {
     public class RegisterIoCDependencyMacroMoveRotateTests
     {
         public RegisterIoCDependencyMacroMoveRotateTests()
         {
             new InitScopeBasedIoCImplementationCommand().Execute();
+            IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set",
+            IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         }
 
         [Fact]
-        public void Execute_ShouldRegisterMacroMoveAndRotate()
+        public void MacroMoveRotate_Dependencies_Should_Be_Registered()
         {
             var iocScope = IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"));
             IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", iocScope).Execute();
 
-            var moveSpec = new[] { "MoveCommand1", "MoveCommand2" };
-            var rotateSpec = new[] { "RotateCommand1", "RotateCommand2" };
+            var cmd1 = new Mock<SpaceBattle_workspace.ICommand>();
+            var cmd2 = new Mock<SpaceBattle_workspace.ICommand>();
 
-            var moveCommandMocks = moveSpec.Select(cmd =>
-            {
-                var mock = new Mock<SpaceBattle_workspace.ICommand>();
-                IoC.Resolve<Hwdtech.ICommand>("IoC.Register", cmd, (object[] args) => mock.Object).Execute();
-                return mock;
-            }).ToArray();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Specs.Move",
+                (object[] args) => new string[] { "Command1", "Command2" }).Execute();
 
-            var rotateCommandMocks = rotateSpec.Select(cmd =>
-            {
-                var mock = new Mock<SpaceBattle_workspace.ICommand>();
-                IoC.Resolve<Hwdtech.ICommand>("IoC.Register", cmd, (object[] args) => mock.Object).Execute();
-                return mock;
-            }).ToArray();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Command1",
+                (object[] args) => cmd1.Object).Execute();
 
-            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Specs.Move", (object[] args) => moveSpec).Execute();
-            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Specs.Rotate", (object[] args) => rotateSpec).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Command2",
+                (object[] args) => cmd2.Object).Execute();
+
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Specs.Rotate",
+                (object[] args) => new string[] { "Command1", "Command2" }).Execute();
+
+            IoC.Resolve<Hwdtech.ICommand>(
+                "IoC.Register",
+                "Commands.Macro",
+                (Func<object[], object>)((args) => new MacroCommand((SpaceBattle_workspace.ICommand[])args))
+            ).Execute();
 
             new RegisterIoCDependencyMacroMoveRotate().Execute();
 
             var moveMacro = IoC.Resolve<SpaceBattle_workspace.ICommand>("Macro.Move");
             moveMacro.Execute();
-            foreach (var mock in moveCommandMocks)
-            {
-                mock.Verify(cmd => cmd.Execute(), Times.Once());
-            }
-
-            var rotateMacro = IoC.Resolve<SpaceBattle_workspace.ICommand>("Macro.Rotate");
-            rotateMacro.Execute();
-            foreach (var mock in rotateCommandMocks)
-            {
-                mock.Verify(cmd => cmd.Execute(), Times.Once());
-            }
+            cmd1.Verify(c => c.Execute(), Times.Once());
+            cmd2.Verify(c => c.Execute(), Times.Once());
         }
     }
 }

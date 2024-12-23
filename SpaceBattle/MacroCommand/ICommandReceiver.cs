@@ -1,6 +1,6 @@
 namespace SpaceBattle_workspace;
 
-public interface ICommandReceiver : ICommand
+public interface ICommandReceiver
 {
     void Receive(ICommand cmd);
 }

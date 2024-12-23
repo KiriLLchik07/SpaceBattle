@@ -9,6 +9,6 @@ public class RegisterIoCDependencyMacroCommand : Hwdtech.ICommand
         IoC.Resolve<Hwdtech.ICommand>(
             "IoC.Register",
             "Commands.Macro",
-            (object[] args) => (SpaceBattle_workspace.ICommand)new SimpleMacroCommand(args.Select(x => (SpaceBattle_workspace.ICommand)x).ToArray())).Execute();
+            (object[] args) => (SpaceBattle_workspace.ICommand)new MacroCommand(args.Select(x => (SpaceBattle_workspace.ICommand)x).ToArray())).Execute();
     }
 }

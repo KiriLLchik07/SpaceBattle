@@ -1,5 +1,6 @@
 using Hwdtech;
 using Hwdtech.Ioc;
+using SpaceBattle_workspace;
 
 namespace SpaceBattle_workspace
 {
@@ -15,8 +16,22 @@ namespace SpaceBattle_workspace
         public ICommand Resolve(object[] args)
         {
             var cmdsNames = IoC.Resolve<string[]>($"Specs.{cmdSpec}");
-            var cmds = cmdsNames.Select(name => IoC.Resolve<ICommand>(name, args)).ToArray();
-            return IoC.Resolve<ICommand>("Commands.Macro", cmds.Cast<object>().ToArray());
+            if (cmdsNames == null)
+                throw new InvalidOperationException("No commands specified in the macro spec");
+
+            if (cmdsNames.Length == 0)
+                throw new InvalidOperationException("No commands specified in the macro spec");
+
+            var cmds = cmdsNames.Select(name =>
+            {
+                var cmd = IoC.Resolve<object>(name, args);
+                if (cmd is SpaceBattle_workspace.ICommand command)
+                    return command;
+                else
+                    throw new InvalidOperationException($"Command {name} is not of type ICommand");
+            }).ToArray();
+
+            return new MacroCommand(cmds);
         }
     }
 }

@@ -1,11 +1,16 @@
 using Hwdtech;
-
-namespace SpaceBattle_workspace;
+using SpaceBattle_workspace;
 
 public class RegisterIoCDependencyMacroMoveRotate : Hwdtech.ICommand
 {
     public void Execute()
     {
+        IoC.Resolve<Hwdtech.ICommand>(
+            "IoC.Register",
+            "Commands.Macro",
+            (Func<object[], object>)((args) => new MacroCommand((SpaceBattle_workspace.ICommand[])args))
+        ).Execute();
+
         IoC.Resolve<Hwdtech.ICommand>(
             "IoC.Register",
             "Macro.Move",
@@ -18,4 +23,7 @@ public class RegisterIoCDependencyMacroMoveRotate : Hwdtech.ICommand
             (object[] args) => new CreateMacroCommandStrategy("Rotate").Resolve(args)
         ).Execute();
     }
+
+
+
 }

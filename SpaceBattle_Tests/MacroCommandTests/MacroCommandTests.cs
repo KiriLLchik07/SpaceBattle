@@ -13,7 +13,7 @@ public class MacroCommandTests
 
         cmd2.Setup(m => m.Execute()).Throws<Exception>();
 
-        var macroCommand = new SimpleMacroCommand(cmd1.Object, cmd2.Object, cmd3.Object);
+        var macroCommand = new MacroCommand(cmd1.Object, cmd2.Object, cmd3.Object);
 
         Assert.Throws<Exception>(() => macroCommand.Execute());
         cmd1.Verify(m => m.Execute(), Times.Once());
