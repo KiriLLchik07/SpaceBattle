@@ -1,7 +1,7 @@
 ﻿using SpaceBattle_workspace;
 using Moq;
 
-namespace SpaceBattle_workspace_Tests;
+namespace SpaceBattle_Tests;
 
 public class MoveCommandTest
 {

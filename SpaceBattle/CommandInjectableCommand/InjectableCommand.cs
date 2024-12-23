@@ -1,8 +1,6 @@
-﻿
+﻿namespace SpaceBattle_workspace;
 
-namespace SpaceBattle_workspace;
-
-public class InjectableCommand : Hwdtech.ICommand
+public class InjectableCommand : Hwdtech.ICommand, ICommandInjectable
 {
     private Hwdtech.ICommand _cmd = new EmptyCommand();
 

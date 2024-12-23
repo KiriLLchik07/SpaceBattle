@@ -1,5 +1,5 @@
 ﻿using Hwdtech;
-using SpaceBattle_workspace;
+namespace SpaceBattle_workspace;
 
 public class RegisterDependencyCommandInjectableCommand : Hwdtech.ICommand
 {

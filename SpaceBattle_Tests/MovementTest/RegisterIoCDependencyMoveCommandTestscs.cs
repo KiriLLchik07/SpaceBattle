@@ -1,11 +1,17 @@
 ﻿using Moq;
 using SpaceBattle_workspace;
 using Hwdtech;
+using Hwdtech.Ioc;
 
 namespace SpaceBattle_Tests;
 
 public class MoveCommandIoCTests
 {
+    public MoveCommandIoCTests()
+    {
+        new InitScopeBasedIoCImplementationCommand().Execute();
+    }
+
     [Fact]
     public void Execute_ShouldRegisterMoveCommandDependency()
     {
