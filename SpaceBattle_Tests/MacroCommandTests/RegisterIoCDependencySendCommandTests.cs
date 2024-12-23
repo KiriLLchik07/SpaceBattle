@@ -10,7 +10,7 @@ namespace SpaceBattle_Tests
         public RegisterIoCDependencySendCommandTests()
         {
             new InitScopeBasedIoCImplementationCommand().Execute();
-            IoC.Resolve<ICommand>("Scopes.Current.Set",
+            IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set",
             IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         }
 
@@ -18,11 +18,11 @@ namespace SpaceBattle_Tests
         public void SendCommand_Should_Send_A_Command_To_The_Command_Receiver()
         {
             var receiver = new Mock<ICommandReceiver>();
-            var cmd = new Mock<ICommand>();
+            var cmd = new Mock<SpaceBattle_workspace.ICommand>();
 
             new RegisterIoCDependencySendCommand().Execute();
 
-            IoC.Resolve<ICommand>("Commands.Send", new object[] { cmd.Object, receiver.Object }).Execute();
+            IoC.Resolve<SpaceBattle_workspace.ICommand>("Commands.Send", new object[] { cmd.Object, receiver.Object }).Execute();
 
             receiver.Verify(r => r.Receive(cmd.Object), Times.Once());
         }
