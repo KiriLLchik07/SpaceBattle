@@ -1,7 +1,7 @@
 ﻿using Moq;
 using SpaceBattle_workspace;
 
-namespace SpaceBattle_workspace_Tests;
+namespace SpaceBattle_Tests;
 
 public class RotateTests
 {
