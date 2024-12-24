@@ -15,14 +15,11 @@ public class RegisterIoCDependencyActionsStartTests
     [Fact]
     public void RegisterIoCDependencyActionsStart_Should_Register_Start_Command()
     {
-        // Arrange
         var gameObject = new Dictionary<string, object>();
 
-        // Act
         new RegisterIoCDependencyActionsStart().Execute();
         var command = IoC.Resolve<Hwdtech.ICommand>("Actions.Start", gameObject, "Move");
 
-        // Assert
         Assert.IsType<ActionStart>(command);
     }
 }
