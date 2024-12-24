@@ -3,6 +3,7 @@ using Hwdtech.Ioc;
 using Moq;
 using SpaceBattle_workspace;
 
+
 namespace SpaceBattle_Tests
 {
     public class CreateMacroCommandTests

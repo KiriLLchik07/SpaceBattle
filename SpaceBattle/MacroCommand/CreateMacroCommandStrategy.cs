@@ -1,5 +1,6 @@
 using Hwdtech;
 
+
 namespace SpaceBattle_workspace
 {
     public class CreateMacroCommandStrategy

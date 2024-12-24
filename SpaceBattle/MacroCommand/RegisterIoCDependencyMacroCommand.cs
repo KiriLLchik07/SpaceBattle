@@ -1,4 +1,3 @@
-using Hwdtech.Ioc;
 using Hwdtech;
 namespace SpaceBattle_workspace;
 

@@ -1,5 +1,6 @@
 namespace SpaceBattle_workspace;
 
+
 public class MacroCommand : ICommand
 {
     public ICommand[] cmds;

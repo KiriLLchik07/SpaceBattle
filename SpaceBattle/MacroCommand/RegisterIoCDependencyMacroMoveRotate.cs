@@ -17,7 +17,4 @@ public class RegisterIoCDependencyMacroMoveRotate : Hwdtech.ICommand
             (object[] args) => new CreateMacroCommandStrategy("Rotate").Resolve(args)
         ).Execute();
     }
-
-
-
 }
