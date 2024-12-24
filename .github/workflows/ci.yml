@@ -30,7 +30,7 @@ jobs:
       - name: Install Required Tools
         run: |
           dotnet new tool-manifest
-          dotnet add StarWars.Tests/StarWars.Tests.csproj package Moq
+          dotnet add SpaceBattle_Tests/SpaceBattle_Tests.csproj package Moq
 
       - name: Build
         run: |
