@@ -13,6 +13,7 @@ namespace SpaceBattle_Tests
         }
 
         [Fact]
+
         public void ResolveMacroCommand_Success()
         {
             var command_1 = new Mock<SpaceBattle_workspace.ICommand>();
