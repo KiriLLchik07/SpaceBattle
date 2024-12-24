@@ -1,6 +1,4 @@
-﻿
-using Hwdtech;
-
+﻿using Hwdtech;
 
 namespace SpaceBattle_workspace;
 
